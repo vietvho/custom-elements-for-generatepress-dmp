@@ -3,8 +3,8 @@
 function gpw_register_hook_block_cpt() {
     register_post_type('gpw_block', [
         'labels' => [
-            'name' => __('GP Elements','generatepress-custom-elements'),
-            'singular_name' => __('GP Elements','generatepress-custom-elements')
+            'name' => __('GP Elements','custom-elements-for-generatepress-dmp'),
+            'singular_name' => __('GP Elements','custom-elements-for-generatepress-dmp')
         ],
         'public' => false,
         'show_ui' => true,
