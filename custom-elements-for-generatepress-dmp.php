@@ -12,7 +12,7 @@
 
 
 if ( ! defined( 'ABSPATH' ) ) exit;
-define("WINCVERSION", 1.0);
+define("DIGITALMPCEVERSION", 1.0);
 
 if (!function_exists('is_plugin_active')) {
     require_once ABSPATH . 'wp-admin/includes/plugin.php';

@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 add_action('customize_register', function($wp_customize) {
     $wp_customize->remove_control('generate_settings[nav_position_setting]');
