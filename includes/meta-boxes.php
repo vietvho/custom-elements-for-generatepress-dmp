@@ -30,11 +30,6 @@ function digitalmpce_render_hook_selector($post) {
     echo '</select>';
 }
 
-// add_action( 'admin_print_scripts', 'digitalmpce_inline_js' );
-function digitalmpce_inline_js() { ?>
-    <script>jQuery(document).ready(function($){ $(".digitalmpce_select2").select2(); });</script>
-<?php }
-
 function digitalmpce_render_visibility_selector($post) {
     wp_nonce_field('digitalmpce_save_meta_box', 'digitalmpce_meta_box_nonce');
 
