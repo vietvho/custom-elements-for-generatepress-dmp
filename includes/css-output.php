@@ -27,7 +27,7 @@ add_filter('generate_navigation_location', function($position) {
     global $digitalmpce_renderNav;
     if ($position === 'nav-center') {
         if (!$digitalmpce_renderNav) {
-            generate_center_navigation();
+            digitalmpce_generate_center_navigation();
             $digitalmpce_renderNav = true;
         }
         return 'nav-float-right';

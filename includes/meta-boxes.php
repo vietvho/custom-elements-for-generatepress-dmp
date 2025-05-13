@@ -30,7 +30,7 @@ function digitalmpce_render_hook_selector($post) {
     echo '</select>';
 }
 
-add_action( 'admin_print_scripts', 'digitalmpce_inline_js' );
+// add_action( 'admin_print_scripts', 'digitalmpce_inline_js' );
 function digitalmpce_inline_js() { ?>
     <script>jQuery(document).ready(function($){ $(".digitalmpce_select2").select2(); });</script>
 <?php }
@@ -42,6 +42,7 @@ function digitalmpce_render_visibility_selector($post) {
     $types = ['post', 'page'];
 
     echo '<select class="digitalmpce_select2" name="digitalmpce_target_id">';
+    echo "<option value='whole_site'" . selected($target_id, 'whole_site', false) . ">Entire Website</option>";
     foreach ($types as $type) {
         echo "<optgroup label='" . esc_html(ucfirst($type)) . "'>";
         printf('<option value="all%1$ss"> All %2$ss</option>', esc_attr($type), esc_html(ucfirst($type)));

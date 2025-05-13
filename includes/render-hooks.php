@@ -22,7 +22,7 @@ function digitalmpce_output_blocks() {
                     ($target_id === 'homepage' && !is_front_page()) ||
                     ($target_id === 'allposts' && $post_type !== 'post') ||
                     ($target_id === 'allpages' && $post_type !== 'page') ||
-                    (!in_array($target_id, ['homepage', 'allposts', 'allpages']) && $post_id != $target_id)
+                    (!in_array($target_id, ['homepage', 'allposts', 'allpages', "whole_site"]) && $post_id != $target_id)
                 ) return;
 
                 echo '<div class="digitalmpce-block">';
