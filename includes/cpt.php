@@ -1,7 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-function gpw_register_hook_block_cpt() {
-    register_post_type('gpw_block', [
+function digitalmpce_register_hook_block_cpt() {
+    register_post_type('digitalmpce_block', [
         'labels' => [
             'name' => __('GP Elements','custom-elements-for-generatepress-dmp'),
             'singular_name' => __('GP Elements','custom-elements-for-generatepress-dmp')
@@ -14,4 +15,4 @@ function gpw_register_hook_block_cpt() {
         'editor_width' => 1200,
     ]);
 }
-add_action('init', 'gpw_register_hook_block_cpt');
+add_action('init', 'digitalmpce_register_hook_block_cpt');

@@ -1,6 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-function generate_center_navigation() {
+function digitalmpce_generate_center_navigation() {
     if (!class_exists('GeneratePress_CSS')) return;
 
     $css = new GeneratePress_CSS();
@@ -19,15 +20,15 @@ function generate_center_navigation() {
     wp_add_inline_style('generate-style', $css->css_output());
 }
 
-global $renderNav;
-$renderNav = false;
+global $digitalmpce_renderNav;
+$digitalmpce_renderNav = false;
 
 add_filter('generate_navigation_location', function($position) {
-    global $renderNav;
+    global $digitalmpce_renderNav;
     if ($position === 'nav-center') {
-        if (!$renderNav) {
-            generate_center_navigation();
-            $renderNav = true;
+        if (!$digitalmpce_renderNav) {
+            digitalmpce_generate_center_navigation();
+            $digitalmpce_renderNav = true;
         }
         return 'nav-float-right';
     }
