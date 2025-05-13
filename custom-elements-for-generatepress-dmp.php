@@ -14,6 +14,18 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 define("DIGITALMPCEVERSION", 1.0);
 
+$theme = wp_get_theme();
+if ( strtolower( $theme->get( 'Name' ) ) !== 'generatepress' ) {
+
+    add_action('admin_notices', function() {
+        echo '<div class="notice notice-warning"><p>';
+        esc_html_e('Custom Elements for GeneratePress works only with the GeneratePress theme. Thank you for choosing our plugin.', 'custom-elements-for-generatepress-dmp');
+        echo '</p></div>';
+    });
+
+    return;
+}
+
 if (!function_exists('is_plugin_active')) {
     require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
