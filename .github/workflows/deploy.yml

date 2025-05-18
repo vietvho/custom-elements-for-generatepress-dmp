@@ -1,0 +1,44 @@
+name: Deploy WordPress Plugin
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SVN
+        run: sudo apt-get install -y subversion
+
+      - name: Deploy to WordPress.org
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        run: |
+            PLUGIN_SLUG=$(basename `pwd`)
+            VERSION=${GITHUB_REF#refs/tags/}
+            SVN_URL="https://plugins.svn.wordpress.org/${PLUGIN_SLUG}"
+            TEMP_DIR="/tmp/${PLUGIN_SLUG}"
+
+            echo "Deploying version ${VERSION} to ${SVN_URL}"
+
+            # Checkout SVN repo
+            svn checkout "$SVN_URL" "$TEMP_DIR" --username "$SVN_USERNAME" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert
+
+            # Copy plugin files
+            rsync -av --exclude='.git*' --exclude='README.md' --exclude='.github' ./ "$TEMP_DIR/trunk/"
+
+            # Copy to tag
+            mkdir -p "$TEMP_DIR/tags/$VERSION"
+            cp -r "$TEMP_DIR/trunk/" "$TEMP_DIR/tags/$VERSION"
+
+            cd "$TEMP_DIR"
+            svn add --force * --auto-props --parents --depth infinity -q
+
+            svn commit -m "Deploy version ${VERSION}" --username "$SVN_USERNAME" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert
