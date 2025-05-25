@@ -30,7 +30,6 @@ if (!function_exists('is_plugin_active')) {
     require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
-
 // Load all includes
 require_once plugin_dir_path(__FILE__) . 'includes/cpt.php';
 require_once plugin_dir_path(__FILE__) . 'includes/meta-boxes.php';
