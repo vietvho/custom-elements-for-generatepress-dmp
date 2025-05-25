@@ -19,7 +19,10 @@ Custom Elements for GeneratePress by DigitalMasteryPath makes it easy to insert 
 - Use Gutenberg to design your content visually  
 - Center-align the primary navigation bar  
 - Lightweight and fast — built specifically for GeneratePress
-
+- ✅ **See examples in action:**  
+  - [GeneratePress Hooks & Filters Blog Post](https://digitalmasterypath.com/blog/generatepress-hooks-and-filters/)  
+  - [Video Tutorial on YouTube](https://www.youtube.com/watch?v=aaELJeWDuOI)
+  
 == Installation ==
 
 1. Upload the plugin folder to `/wp-content/plugins/`
