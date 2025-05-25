@@ -30,7 +30,6 @@ if (!function_exists('is_plugin_active')) {
     require_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
-if (is_plugin_active('gp-premium/gp-premium.php')) return;
 
 // Load all includes
 require_once plugin_dir_path(__FILE__) . 'includes/cpt.php';

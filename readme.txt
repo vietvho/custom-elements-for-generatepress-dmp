@@ -35,8 +35,6 @@ Custom Elements for GeneratePress by DigitalMasteryPath makes it easy to insert 
 = Does this replace GeneratePress Premium's Elements? =  
 No — this provides a lightweight, block-based way to add **custom layout positions** using the most useful hooks. It’s ideal for those who want visual layout control without writing code.
 
-> Note: This plugin will automatically deactivate if **GP Premium** is active to prevent conflicts.
-
 
 = Can I use it without GeneratePress Premium? =  
 Yes — this plugin works with the free GeneratePress theme.
