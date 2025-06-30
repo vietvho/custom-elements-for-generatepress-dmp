@@ -21,6 +21,7 @@ function digitalmpce_render_hook_selector($post) {
         'generate_after_entry_title' => 'After Entry Title',
         'generate_after_content' => 'After Content',
         'generate_footer' => 'Footer',
+        'wp_head' => 'WordPress Header',
         'wp_footer' => 'WordPress Footer',
     ];
     echo '<select name="digitalmpce_hook" id="digitalmpce_hook">';
