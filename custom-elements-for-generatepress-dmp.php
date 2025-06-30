@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom Elements for GeneratePress by DigitalMasteryPath
  * Description: Custom Elements for GeneratePress by DigitalMasteryPath makes it easy to insert block-based content into the most useful GeneratePress hooks — without needing GP Premium or writing PHP.
- * Version: 1.0
+ * Version: 1.01
  * Author: Warren Nguyen
  * Author URI: https://digitalmasterypath.com
  * License: GPL2+
@@ -12,7 +12,7 @@
 
 
 if ( ! defined( 'ABSPATH' ) ) exit;
-define("DIGITALMPCEVERSION", 1.0);
+define("DIGITALMPCEVERSION", 1.01);
 
 $theme = wp_get_theme();
 if ( $theme->parent() ) {
