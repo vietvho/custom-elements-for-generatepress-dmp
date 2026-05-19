@@ -10,34 +10,66 @@
  * Text Domain: custom-elements-for-generatepress-dmp
  */
 
-
 if ( ! defined( 'ABSPATH' ) ) exit;
-define("DIGITALMPCEVERSION", 1.01);
+define("DIGITALMPCEVERSION", "1.01");
 
-$theme = wp_get_theme();
-if ( $theme->parent() ) {
-    $theme = $theme->parent();
-}
+class DigitalMPCE_Plugin {
+    
+    private static $instance = null;
 
-if ( strtolower( $theme->get( 'Name' ) ) !== 'generatepress' ) {
+    public static function get_instance() {
+        if ( null === self::$instance ) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
-    add_action('admin_notices', function() {
+    private function __construct() {
+        add_action('plugins_loaded', [$this, 'init']);
+    }
+
+    public function init() {
+        $theme = wp_get_theme();
+        if ( $theme->parent() ) {
+            $theme = $theme->parent();
+        }
+
+        if ( strtolower( $theme->get( 'Name' ) ) !== 'generatepress' ) {
+            add_action('admin_notices', [$this, 'admin_notice_missing_generatepress']);
+            return;
+        }
+
+        if ( ! function_exists( 'is_plugin_active' ) ) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+
+        $this->includes();
+        $this->init_classes();
+    }
+
+    public function admin_notice_missing_generatepress() {
         echo '<div class="notice notice-warning"><p>';
         esc_html_e('Custom Elements for GeneratePress works only with the GeneratePress theme. Thank you for choosing our plugin.', 'custom-elements-for-generatepress-dmp');
         echo '</p></div>';
-    });
+    }
 
-    return;
+    private function includes() {
+        require_once plugin_dir_path(__FILE__) . 'includes/class-cpt.php';
+        require_once plugin_dir_path(__FILE__) . 'includes/class-meta-boxes.php';
+        require_once plugin_dir_path(__FILE__) . 'includes/class-enqueue.php';
+        require_once plugin_dir_path(__FILE__) . 'includes/class-render-hooks.php';
+        require_once plugin_dir_path(__FILE__) . 'includes/class-customizer.php';
+        require_once plugin_dir_path(__FILE__) . 'includes/class-css-output.php';
+    }
+
+    private function init_classes() {
+        new DigitalMPCE_CPT();
+        new DigitalMPCE_Meta_Boxes();
+        new DigitalMPCE_Enqueue();
+        new DigitalMPCE_Render_Hooks();
+        new DigitalMPCE_Customizer();
+        new DigitalMPCE_CSS_Output();
+    }
 }
 
-if (!function_exists('is_plugin_active')) {
-    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-}
-
-// Load all includes
-require_once plugin_dir_path(__FILE__) . 'includes/cpt.php';
-require_once plugin_dir_path(__FILE__) . 'includes/meta-boxes.php';
-require_once plugin_dir_path(__FILE__) . 'includes/enqueue.php';
-require_once plugin_dir_path(__FILE__) . 'includes/render-hooks.php';
-require_once plugin_dir_path(__FILE__) . 'includes/customizer.php';
-require_once plugin_dir_path(__FILE__) . 'includes/css-output.php';
+DigitalMPCE_Plugin::get_instance();
